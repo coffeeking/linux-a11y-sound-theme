@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Sound Naming Specification</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2" /></head><body><div class="article" title="Sound Naming Specification"><div class="titlepage"><div><div><h2 class="title"><a id="index"></a>Sound Naming Specification</h2></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Marc-Andre</span> <span class="surname">Lureau</span></h3><div class="affiliation"><div class="address"><p><br />
+	    <code class="email">&lt;<a class="email" href="mailto:marcandre.lureau@gmail.com">marcandre.lureau@gmail.com</a>&gt;</code><br />
+	  </p></div></div></div><div class="author"><h3 class="author"><span class="firstname">Lennart</span> <span class="surname">Poettering</span></h3><div class="affiliation"><div class="address"><p><br />
+	    <code class="email">&lt;<a class="email" href="mailto:lennart@poettering.net">lennart@poettering.net</a>&gt;</code><br />
+	  </p></div></div></div><div class="author"><h3 class="author"><span class="firstname">Rodney</span> <span class="surname">Dawes</span></h3><div class="affiliation"><div class="address"><p><br />
+	    <code class="email">&lt;<a class="email" href="mailto:dobey.pwns@gmail.com">dobey.pwns@gmail.com</a>&gt;</code><br />
+	  </p></div></div></div><div class="author"><h3 class="author"><span class="firstname">Jon</span> <span class="surname">Bold</span></h3><div class="affiliation"><div class="address"><p><br />
+	    <code class="email">&lt;<a class="email" href="mailto:jon.wordescapes@co.uk">jon.wordescapes@co.uk</a>&gt;</code><br />
+	  </p></div></div></div></div></div><div><p class="releaseinfo">Post-0.3 Snapshot</p></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#overview">Overview</a></span></dt><dt><span class="sect1"><a href="#context">Context</a></span></dt><dt><span class="sect1"><a href="#guidelines">Sound Naming Guidelines</a></span></dt><dt><span class="sect1"><a href="#names">Standard Sounds Names</a></span></dt><dd><dl><dt><span class="sect2"><a href="#alerts">Alerts</a></span></dt><dt><span class="sect2"><a href="#notification">Notifications</a></span></dt><dt><span class="sect2"><a href="#actions">Actions</a></span></dt><dt><span class="sect2"><a href="#inputfeedback">Input Feedback</a></span></dt><dt><span class="sect2"><a href="#games">Game</a></span></dt></dl></dd><dt><span class="sect1"><a href="#background">Background</a></span></dt><dt><span class="appendix"><a href="#changelog">A. Change History</a></span></dt></dl></div><div class="sect1" title="Overview"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="overview"></a>Overview</h2></div></div></div><p>
+This specification gives direction on how to name the sounds that are
+available for use by applications, when creating a sound theme. It
+does so by laying out a standard naming scheme for sound creation, as
+well as providing a minimal list of must have sounds, and a larger
+list with many more examples to help with the creation of extended
+sounds for third party applications, with different event types and
+usage.
+    </p></div><div class="sect1" title="Context"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="context"></a>Context</h2></div></div></div><p>
+      The list of default contexts for the sound theme are:
+    </p><div class="table"><a id="id431330"></a><p class="title"><b>Table 1. Standard Contexts</b></p><div class="table-contents"><table summary="Standard Contexts" border="1"><colgroup><col /><col /><col /></colgroup><thead><tr><th>Name</th><th>Description</th><th>Directory</th></tr></thead><tbody><tr><td>Alerts</td><td>
+	      Sounds to alert the user of an action or event which may
+	      have a major impact on the system or their current use,
+	      such as <span class="action">dialog-error</span>.
+	    </td><td>alert</td></tr><tr><td>Notifications</td><td>
+	      Sounds to notify the user that the system, or their
+	      current use case has changed state in some way, e.g. new
+	      email arriving, new non-critical update available...
+	    </td><td>notification</td></tr><tr><td>Actions</td><td>
+	      Sounds that give the user feedback on their
+	      actions.
+	    </td><td>action</td></tr><tr><td>Input Feedback</td><td>
+	      Sounds that give direct response to input events from the user, such as mouse clicks or key presses.
+	    </td><td>action</td></tr><tr><td>Game</td><td>
+	      Sound used in games.
+	    </td><td>game</td></tr></tbody></table></div></div><br class="table-break" /></div><div class="sect1" title="Sound Naming Guidelines"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="guidelines"></a>Sound Naming Guidelines</h2></div></div></div><p>
+      Here we define some guidelines for when creating new sounds that
+      extend the standardized list of sound names defined here, in
+      order to provide sounds for more specific events and usages.
+      </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	    Sound names are in the en_US.US_ASCII locale. This means
+	    that the characters allowed in the sound names must
+	    fall within the US-ASCII character set. As a further
+	    restriction, all sound names may only contain lowercase
+	    letters, numbers, underscore, dash, or period
+	    characters. Spaces, colons, slashes, and backslashes are
+	    not allowed. Also, sound names must be spelled as they are
+	    in the en_US dictionary.
+	  </p></li><li class="listitem"><p>
+	    The dash <span class="quote">“<span class="quote">-</span>”</span> character is used to separate
+	    levels of specificity in sound names.  For instance, we
+	    use <span class="quote">“<span class="quote">search-results</span>”</span> as the generic item for
+	    all search results, and we use
+	    <span class="quote">“<span class="quote">search-results-empty</span>”</span> for an empty search
+	    result. However, if the more specific item does not exist
+	    in the current theme, and does exist in a parent theme,
+	    the generic sound from the current theme is preferred, in
+	    order to keep consistent style. From left to right the
+	    words in a sound name become more specific. In some cases
+	    what word in a name is more specific is
+	    ambiguous. (i.e. "dialog-error" and "error-dialog" both
+	    make sense, the former would ease defining the same sound
+	    for all dialogs popping up, regardless of its context, the
+	    latter would ease defining the same sound for all errors,
+	    regardless of how it is presented to the user). In such
+	    cases it is generally preferred to put the UI element noun
+	    left -- if there is one --, however exceptions of this
+	    rule are acceptable.
+	  </p></li><li class="listitem"><p>
+	    Sounds for branded applications should be named the same
+	    as the binary executable for the application, prefixed by
+	    the string <span class="quote">“<span class="quote">x-</span>”</span>, to avoid name space clashes with future
+	    standardized names. Example: <span class="quote">“<span class="quote">x-openoffice-foobar</span>”</span>.
+	  </p></li><li class="listitem"><p>
+            Please send suggestions for new standardized names to the XDG mailing list: <code class="email">&lt;<a class="email" href="mailto:xdg@lists.freedesktop.org">xdg@lists.freedesktop.org</a>&gt;</code>
+          </p></li></ul></div><p>
+    </p></div><div class="sect1" title="Standard Sounds Names"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="names"></a>Standard Sounds Names</h2></div></div></div><p>
+      This section describes the standard sounds names that should be
+      used by artists when creating themes, and by developers when
+      writing applications which will use the Sound Theme
+      Specification.
+    </p><div class="sect2" title="Alerts"><div class="titlepage"><div><div><h3 class="title"><a id="alerts"></a>Alerts</h3></div></div></div><p>
+	This is to notify the user of an action or event which may
+	have a major impact on the system or their current use case.
+      </p><div class="table"><a id="alerts-table"></a><p class="title"><b>Table 2. Standard Alert Sounds</b></p><div class="table-contents"><table summary="Standard Alert Sounds" border="1"><colgroup><col /><col /></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>network-connectivity-lost</td><td>
+		The sound used when network connectivity is lost.
+	      </td></tr><tr><td>network-connectivity-error</td><td>
+		The sound used when an error occurs when it is tried
+		to initialize the network connection of the computing
+		device.
+	      </td></tr><tr><td>dialog-error</td><td>
+		The sound used when a dialog is opened to explain an
+		error condition to the user.
+	      </td></tr><tr><td>battery-low</td><td>
+		The sound used when the battery is low (below 20%, for
+		example).
+	      </td></tr><tr><td>suspend-error</td><td>
+		The machine failed to suspend.
+	      </td></tr><tr><td>software-update-urgent</td><td>
+		The sound used when an urgent update is available
+		through the system software update program.
+	      </td></tr><tr><td>power-unplug-battery-low</td><td>
+		The power cable has been unplugged and the battery level is low.
+	      </td></tr></tbody></table></div></div><br class="table-break" /></div><div class="sect2" title="Notifications"><div class="titlepage"><div><div><h3 class="title"><a id="notification"></a>Notifications</h3></div></div></div><p>
+	This is to alert the user that the system, or their current
+	use case has changed state in some way - mew email arriving,
+	new non-critical update to an application available.
+      </p><div class="table"><a id="notifications-table"></a><p class="title"><b>Table 3. Standard Notifications Sounds</b></p><div class="table-contents"><table summary="Standard Notifications Sounds" border="1"><colgroup><col /><col /></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>message-new-instant</td><td>
+		The sound used when a new IM is recieved.
+	      </td></tr><tr><td>message-new-email</td><td>
+		The sound used when a new email is recieved.
+	      </td></tr><tr><td>complete-media-burn</td><td>
+		The sound used when an optical medium completed burning.
+	      </td></tr><tr><td>complete-media-burn-test</td><td>
+		The sound used when an optical medium completed a dummy burn run.
+	      </td></tr><tr><td>complete-media-rip</td><td>
+		The sound used when an (optical) medium completed ripping.
+	      </td></tr><tr><td>complete-media-format</td><td>
+		The sound used when a disk/medium completed formatting/blanking.
+	      </td></tr><tr><td>complete-download</td><td>
+		The sound used when a file completed downloading.
+	      </td></tr><tr><td>complete-copy</td><td>
+		The sound used when a file completed copying.
+	      </td></tr><tr><td>complete-scan</td><td>
+		The sound used when a scanner completed image acquisition and software completed image processing.
+	      </td></tr><tr><td>phone-incoming-call</td><td>
+		The sound used when an phone/voip call is coming in. Usually some kind of ring sound.
+	      </td></tr><tr><td>phone-outgoing-busy</td><td>
+		The sound used when a phone/voip call is dialed out and the responder is not available.
+	      </td></tr><tr><td>phone-hangup</td><td>
+		The sound used when a phone/voip call is ended due to hangup.
+	      </td></tr><tr><td>phone-failure</td><td>
+		The sound used when a phone/voip call is canceled due to some error.
+	      </td></tr><tr><td>network-connectivity-established</td><td>
+		The sound used when network connectivity is established.
+	      </td></tr><tr><td>system-bootup</td><td>
+		The sound used when the computer is being booted up, played as as early in bootup as possible.
+	      </td></tr><tr><td>system-ready</td><td>
+		The sound used when the computer is booted up and shows the login screen.
+	      </td></tr><tr><td>system-shutdown</td><td>
+		The sound used when the computer is being shut down.
+	      </td></tr><tr><td>search-results</td><td>
+		The sound used when one or more search results are
+		returned.
+	      </td></tr><tr><td>search-results-empty</td><td>
+		The sound used when no search results are returned.
+	      </td></tr><tr><td>desktop-login</td><td>
+		The sound used when a user logs into the system, played as a welcome sound immediately after the login screen disappeared.
+	      </td></tr><tr><td>desktop-logout</td><td>
+		The sound used when a user logs out of the system.
+	      </td></tr><tr><td>desktop-screen-lock</td><td>
+		The sound used when the user locks their current
+		session.
+	      </td></tr><tr><td>service-login</td><td>
+		The sound used when a user logs into a service
+		(i.e. Gaim login)
+	      </td></tr><tr><td>service-logout</td><td>
+		The sound used when a user logs out of a service
+		(i.e. Gaim logout)
+	      </td></tr><tr><td>battery-caution</td><td>
+		The sound used when the battery is nearing exhaustion (below 40%, for
+		example)
+	      </td></tr><tr><td>battery-full</td><td>
+		The sound used when the battery is fully loaded up.
+	      </td></tr><tr><td>dialog-warning</td><td>
+		The sound used when a dialog is opened to give
+		information to the user that may be pertinent to the
+		requested action.
+	      </td></tr><tr><td>dialog-information</td><td>
+		The sound used when a dialog is opened to give
+		information to the user that may be pertinent to the
+		requested action.
+	      </td></tr><tr><td>dialog-question</td><td>
+		The sound used when a dialog is opened to ask the user a question.
+	      </td></tr><tr><td>software-update-available</td><td>
+		The sound used when an update is available for
+		software installed on the computing device, through
+		the system software update program.
+	      </td></tr><tr><td>device-added</td><td>
+		The sound used when a device has become available to the desktop, i.e. due to USB plugging.
+	      </td></tr><tr><td>device-added-audio</td><td>
+		The sound used when an audio device has become available to the desktop, i.e. due to USB plugging.
+	      </td></tr><tr><td>device-added-media</td><td>
+		The sound used when a disk/medium has become available to the desktop, i.e. due to USB plugging.
+	      </td></tr><tr><td>device-removed</td><td>
+		The sound used when a device has become unavailable to the desktop, i.e. due to USB unplug.
+	      </td></tr><tr><td>device-removed-media</td><td>
+		The sound used when a disk/medium has become unavailable to the desktop, i.e. due to USB unplug.
+	      </td></tr><tr><td>device-removed-audio</td><td>
+		The sound used when an audio device has become unavailable to the desktop, i.e. due to USB unplug.
+	      </td></tr><tr><td>window-new</td><td>
+		The sound used when a new window or dialog is opened.
+	      </td></tr><tr><td>power-plug</td><td>
+		The power cable has been plugged in.
+	      </td></tr><tr><td>power-unplug</td><td>
+		The power cable has been unplugged.
+	      </td></tr><tr><td>suspend-start</td><td>
+		The machine is about to suspend.
+	      </td></tr><tr><td>suspend-resume</td><td>
+		The machine has returned from suspended state.
+	      </td></tr><tr><td>lid-open</td><td>
+		The lid has been opened (for laptops, mobile devices)
+	      </td></tr><tr><td>lid-close</td><td>
+		The lid has been closed (for laptops, mobile devices)
+	      </td></tr><tr><td>alarm-clock-elapsed</td><td>
+		A user configured alarm elapsed.
+	      </td></tr><tr><td>window-attention-active</td><td>
+		An active/visible window demands attention.
+	      </td></tr><tr><td>window-attention-inactive</td><td>
+		An inactive/invisible window demands attention.
+	      </td></tr></tbody></table></div></div><br class="table-break" /></div><div class="sect2" title="Actions"><div class="titlepage"><div><div><h3 class="title"><a id="actions"></a>Actions</h3></div></div></div><p>
+	Action sounds are used as feedback for user operations.
+      </p><div class="table"><a id="actions-table"></a><p class="title"><b>Table 4. Standard Action Sounds</b></p><div class="table-contents"><table summary="Standard Action Sounds" border="1"><colgroup><col /><col /></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>phone-outgoing-calling</td><td>
+		The sound used when a phone/voip call is dialed out.
+	      </td></tr><tr><td>message-sent-instant</td><td>
+		The sound used when a new IM is sent.
+	      </td></tr><tr><td>message-sent-email</td><td>
+		The sound used when a new email is sent.
+	      </td></tr><tr><td>bell-terminal</td><td>
+		The sound to use as a terminal bell.
+	      </td></tr><tr><td>bell-window-system</td><td>
+		The sound to use as a generic bell for X11 or other window systems.
+	      </td></tr><tr><td>trash-empty</td><td>
+		The sound used when the user empties the trash.
+	      </td></tr><tr><td>item-deleted</td><td>
+		The sound used when a item is deleted.
+	      </td></tr><tr><td>file-trash</td><td>
+		The sound used when a file or folder is sent to the
+		trash.
+	      </td></tr><tr><td>camera-shutter</td><td>
+		A photo has been shot.
+	      </td></tr><tr><td>camera-focus</td><td>
+		A camera has the focus.
+	      </td></tr><tr><td>screen-capture</td><td>
+		A screenshot was made.
+	      </td></tr><tr><td>count-down</td><td>
+		A countdown (e.g. for a photo shooting) sound that is repeated each second.
+	      </td></tr><tr><td>completion-sucess</td><td>
+                A text completion was attempted and was successful.
+	      </td></tr><tr><td>completion-fail</td><td>
+                A text completion was attempted and was not successful.
+	      </td></tr><tr><td>completion-partial</td><td>
+                A text completion was attempted and was partially successful.
+	      </td></tr><tr><td>completion-rotation</td><td>
+                A text completion was attempted and the list of available options reached the end and completion started from the beginning.
+	      </td></tr><tr><td>audio-volume-change</td><td>
+		The test sound that is used to make volume changes noticeable by the user when he uses a volume slider.
+	      </td></tr><tr><td>audio-channel-left</td><td>
+		The test sound for identifying the left speaker. A mono file with a voice saying "left".
+	      </td></tr><tr><td>audio-channel-right</td><td>
+		The test sound for identifying the right speaker. A mono file with a voice saying "right".
+	      </td></tr><tr><td>audio-channel-front-left</td><td>
+		The test sound for identifying the front-left speaker. A mono file with a voice saying "front left".
+	      </td></tr><tr><td>audio-channel-front-right</td><td>
+		The test sound for identifying the front-right speaker. A mono file with a voice saying "front right".
+	      </td></tr><tr><td>audio-channel-front-center</td><td>
+		The test sound for identifying the front-center speaker. A mono file with a voice saying "front center".
+	      </td></tr><tr><td>audio-channel-rear-left</td><td>
+		The test sound for identifying the front-left speaker. A mono file with a voice saying "rear left".
+	      </td></tr><tr><td>audio-channel-rear-right</td><td>
+		The test sound for identifying the front-right speaker. A mono file with a voice saying "rear right".
+	      </td></tr><tr><td>audio-channel-rear-center</td><td>
+		The test sound for identifying the front-center speaker. A mono file with a voice saying "rear center".
+	      </td></tr><tr><td>audio-channel-lfe</td><td>
+		The test sound for identifying the lfe/subwoofer speaker. A mono file with a voice saying "subwoofer", alternatively a low frequency noise.
+	      </td></tr><tr><td>audio-channel-side-left</td><td>
+		The test sound for identifying the side-left speaker. A mono file with a voice saying "side left".
+	      </td></tr><tr><td>audio-channel-side-right</td><td>
+		The test sound for identifying the side-right speaker. A mono file with a voice saying "side right".
+	      </td></tr><tr><td>audio-test-signal</td><td>
+		The test sound for testing audio.
+	      </td></tr><tr><td>theme-demo</td><td>
+                A sound that should be played for demoing this
+                theme. Usually this should just be an alias for a very
+                representative sound (such as desktop-login) of a theme that would work nicely
+                as a demo sound for a theme in the theme selector
+                dialog.
+	      </td></tr></tbody></table></div></div><br class="table-break" /></div><div class="sect2" title="Input Feedback"><div class="titlepage"><div><div><h3 class="title"><a id="inputfeedback"></a>Input Feedback</h3></div></div></div><p>
+	Actions sounds are used as feedback for user input events,
+	such as mouse clicks, or key presses. In contrast to the
+	sounds listed as "Actions" these sounds contain much less
+	context information are are solely used to give the user
+	audible feedback to input events the user himself directly
+	caused.
+      </p><div class="table"><a id="inputfeedback-table"></a><p class="title"><b>Table 5. Standard Input Feedback Sounds</b></p><div class="table-contents"><table summary="Standard Input Feedback Sounds" border="1"><colgroup><col /><col /></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>window-close</td><td>
+		The sound used when an existing window is closed.
+	      </td></tr><tr><td>window-slide-in</td><td>
+		The sound used when a window is slided in by some means. Example: panel.
+	      </td></tr><tr><td>window-slide-out</td><td>
+		The sound used when a window is slided out by some means. Example: panel.
+	      </td></tr><tr><td>window-minimized</td><td>
+		The sound used when an existing window is minimized.
+	      </td></tr><tr><td>window-unminimized</td><td>
+		The sound used when an existing window is unminimized.
+	      </td></tr><tr><td>window-maximized</td><td>
+		The sound used when an existing window is maximized.
+	      </td></tr><tr><td>window-unmaximized</td><td>
+		The sound used when an existing window is unmaximized.
+	      </td></tr><tr><td>window-inactive-click</td><td>
+		The sound used when the user clicks on an inactive window.
+	      </td></tr><tr><td>window-move-start</td><td>
+		A window move started.
+	      </td></tr><tr><td>window-move-end</td><td>
+		A window move ended.
+	      </td></tr><tr><td>window-resize-start</td><td>
+		A window resize started.
+	      </td></tr><tr><td>window-resize-end</td><td>
+		A window resize ended.
+	      </td></tr><tr><td>desktop-switch-left</td><td>
+		The sound used when the window manager switches to another desktop which is located to the left of the current screen.
+	      </td></tr><tr><td>desktop-switch-right</td><td>
+		The sound used when the window manager switches to another desktop which is located to the right of the current screen.
+	      </td></tr><tr><td>window-switch</td><td>
+		The sound used when the window manager switches to another window.
+	      </td></tr><tr><td>notebook-tab-changed</td><td>
+		The sound used when a notebook tab is changed.
+	      </td></tr><tr><td>scroll-up</td><td>
+                Some window was scrolled up.
+	      </td></tr><tr><td>scroll-down</td><td>
+                Some window was scrolled down.
+	      </td></tr><tr><td>scroll-left</td><td>
+                Some window was scrolled left.
+	      </td></tr><tr><td>scroll-right</td><td>
+                Some window was scrolled right.
+	      </td></tr><tr><td>scroll-up-end</td><td>
+                Some window was scrolled up and reached the end of the scrollbar.
+	      </td></tr><tr><td>scroll-down-end</td><td>
+                Some window was scrolled down and reached the end of the scrollbar.
+	      </td></tr><tr><td>scroll-left-end</td><td>
+                Some window was scrolled left and reached the end of the scrollbar.
+	      </td></tr><tr><td>scroll-right-end</td><td>
+                Some window was scrolled right and reached the end of the scrollbar.
+	      </td></tr><tr><td>dialog-ok</td><td>
+		The sound used when a windows is closed by clicking on the OK button for a window.
+	      </td></tr><tr><td>dialog-cancel</td><td>
+		The sound used when a windows is closed by clicking on the Cancel button for a window.
+	      </td></tr><tr><td>drag-start</td><td>
+		The sound used when drag of a file/item is started.
+	      </td></tr><tr><td>drag-accept</td><td>
+		The sound used when a file/item drag is accepted by a window,
+		such as a folder or IM conversation.
+	      </td></tr><tr><td>drag-fail</td><td>
+		The sound used when a file/item drag is not accepted by a window,
+		such as a folder or IM conversation.
+	      </td></tr><tr><td>link-pressed</td><td>
+		The sound used when a link in a web or help browser is pressed.
+	      </td></tr><tr><td>link-released</td><td>
+		The sound used when a link in a web or help browser is releaed.
+	      </td></tr><tr><td>button-pressed</td><td>
+		The sound used when a button is pressed.
+	      </td></tr><tr><td>button-released</td><td>
+		The sound used when a button is released.
+	      </td></tr><tr><td>menu-click</td><td>
+		The sound used when a menu item is clicked.
+	      </td></tr><tr><td>button-toggle-on</td><td>
+		The sound used when a toggle/check/radio button is activated.
+	      </td></tr><tr><td>button-toggle-off</td><td>
+		The sound used when a toggle/check/radio button is deactivated.
+	      </td></tr><tr><td>expander-toggle-on</td><td>
+		The sound used when an expander is activated.
+	      </td></tr><tr><td>expander-toggle-off</td><td>
+		The sound used when an expander is deactivated.
+	      </td></tr><tr><td>menu-popup</td><td>
+		The sound used when a menu is popped up.
+	      </td></tr><tr><td>menu-popdown</td><td>
+		The sound used when a menu is popped down.
+	      </td></tr><tr><td>menu-replace</td><td>
+		The sound used when replacing an active menu with another menu.
+	      </td></tr><tr><td>tooltip-popup</td><td>
+		The sound used when a tooltip is popped up.
+	      </td></tr><tr><td>tooltip-popdown</td><td>
+		The sound used when a tooltip is popped down.
+	      </td></tr><tr><td>item-selected</td><td>
+		The sound used when an item is selected.
+	      </td></tr></tbody></table></div></div><br class="table-break" /></div><div class="sect2" title="Game"><div class="titlepage"><div><div><h3 class="title"><a id="games"></a>Game</h3></div></div></div><p>
+      Sounds for usage in games.
+      </p><div class="table"><a id="games-table"></a><p class="title"><b>Table 6. Standard Games Sounds</b></p><div class="table-contents"><table summary="Standard Games Sounds" border="1"><colgroup><col /><col /></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>game-over-winner</td><td>
+		Guess what...!
+	      </td></tr><tr><td>game-over-loser</td><td>
+		Guess what...!
+	      </td></tr><tr><td>game-card-shuffle</td><td>
+		In card games, when the cards are shuffled.
+	      </td></tr><tr><td>game-human-move</td><td>
+		When the user makes a move.
+	      </td></tr><tr><td>game-computer-move</td><td>
+		When the a computer makes a move.
+	      </td></tr></tbody></table></div></div><br class="table-break" /></div></div><div class="sect1" title="Background"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="background"></a>Background</h2></div></div></div><p>
+    The sound naming specification is heavily based on the "Icon
+    Naming Specification" by Rodney Dawes and the "Bango Project"
+    started by Jon Bolt.
+    </p></div><div class="appendix" title="A. Change History"><h2 class="title" style="clear: both"><a id="changelog"></a>A. Change History</h2><p title="Version 0.3, 25 July 2008, Lennart Poettering"><b>Version 0.3, 25 July 2008, Lennart Poettering. </b>
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+              Split out section about "Input Feedback" sounds.
+	    </p></li><li class="listitem"><p>
+              Document the logic behind choosing "dialog-error" instead of "error-dialog".
+	    </p></li></ul></div><p title="Version 0.3, 25 July 2008, Lennart Poettering">
+      </p><p title="Version 0.2, 4 June 2008, Marc-Andre Lureau and Lennart Poettering"><b>Version 0.2, 4 June 2008, Marc-Andre Lureau and Lennart Poettering. </b>
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+              Naming changes.
+	    </p></li></ul></div><p title="Version 0.2, 4 June 2008, Marc-Andre Lureau and Lennart Poettering">
+      </p><p title="Version 0.1, February 12 2008, Marc-Andre Lureau"><b>Version 0.1, February 12 2008, Marc-Andre Lureau. </b>
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+              Created initial draft.
+	    </p></li></ul></div><p title="Version 0.1, February 12 2008, Marc-Andre Lureau">
+      </p></div></div></body></html>

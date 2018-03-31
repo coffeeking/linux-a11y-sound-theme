@@ -1,0 +1,7 @@
+[Sound Theme]
+Name=linux accessibility
+Comment="a sound theme provided by the linux accessibility organization"
+Directories=stereo
+
+[stereo]
+OutputProfile=stereo

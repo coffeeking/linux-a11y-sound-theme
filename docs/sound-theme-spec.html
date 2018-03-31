@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Sound Theme Specification</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2" /></head><body><div class="article" title="Sound Theme Specification"><div class="titlepage"><div><div><h2 class="title"><a id="index"></a>Sound Theme Specification</h2></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Marc-Andre</span> <span class="surname">Lureau</span></h3><div class="affiliation"><div class="address"><p><br />
+	    <code class="email">&lt;<a class="email" href="mailto:marcandre.lureau@gmail.com">marcandre.lureau@gmail.com</a>&gt;</code><br />
+	  </p></div></div></div><div class="author"><h3 class="author"><span class="firstname">Lennart</span> <span class="surname">Poettering</span></h3><div class="affiliation"><div class="address"><p><br />
+	    <code class="email">&lt;<a class="email" href="mailto:lennart@poettering.net">lennart@poettering.net</a>&gt;</code><br />
+	  </p></div></div></div><div class="author"><h3 class="author"><span class="firstname">Patryk</span> <span class="surname">Zawadzki</span></h3><div class="affiliation"><div class="address"><p><br />
+	    <code class="email">&lt;<a class="email" href="mailto:patrys@pld-linux.org">patrys@pld-linux.org</a>&gt;</code><br />
+	  </p></div></div></div><div class="author"><h3 class="author"><span class="firstname">Alexander</span> <span class="surname">Larsson</span></h3><div class="affiliation"><div class="address"><p><br />
+	    <code class="email">&lt;<a class="email" href="mailto:alexl@redhat.com">alexl@redhat.com</a>&gt;</code><br />
+	  </p></div></div></div><div class="author"><h3 class="author"><span class="firstname">Frans</span> <span class="surname">Englich</span></h3><div class="affiliation"><div class="address"><p><br />
+	    <code class="email">&lt;<a class="email" href="mailto:frans.englich@telia.com">frans.englich@telia.com</a>&gt;</code><br />
+	  </p></div></div></div></div></div><div><p class="releaseinfo">Post-0.5 Snapshot</p></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#overview">Overview</a></span></dt><dt><span class="sect1"><a href="#definitions">Definitions</a></span></dt><dt><span class="sect1"><a href="#directory_layout">Directory Layout</a></span></dt><dt><span class="sect1"><a href="#file_formats">File Formats</a></span></dt><dd><dl><dt><span class="sect2"><a href="#context">Context</a></span></dt></dl></dd><dt><span class="sect1"><a href="#sound_lookup">Sound Lookup</a></span></dt><dt><span class="sect1"><a href="#example">Example</a></span></dt><dt><span class="sect1"><a href="#install_sounds">Installing Application Sounds</a></span></dt><dt><span class="sect1"><a href="#implementation_notes">Implementation Notes</a></span></dt><dt><span class="sect1"><a href="#background">Background</a></span></dt><dt><span class="appendix"><a href="#changes">A. Change history</a></span></dt></dl></div><div class="sect1" title="Overview"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="overview"></a>Overview</h2></div></div></div><p>
+    A sound theme is a set of event sounds that share a common feel,
+    or instrument set.  The user can then select the sound theme that
+    they want to use, and all applications use sounds from the theme.
+    </p><p>
+    From a programmer perspective a sound theme is just a
+    mapping. Given a set of directories to look for sounds in and a
+    theme name it maps from sound name to a sound filename.
+    </p></div><div class="sect1" title="Definitions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="definitions"></a>Definitions</h2></div></div></div><div class="variablelist"><dl><dt><span class="term">Sound Theme</span></dt><dd><p>
+          A sound theme is a named set of sounds. It is used to map
+          from a sound name. Themes may inherit
+          from other themes as a way to extend them.
+	  </p></dd><dt><span class="term">Sound file</span></dt><dd><p>
+          The mandatory supported sound file formats are WAV/PCM
+          8-48kHz, 8/16bits, and OGG/Vorbis I. WAV at 48kHz/Stereo is
+          the recommended uncompressed format, and OGG/Vorbis I is the
+          recommended compressed format.  The sample must be
+          normalized, in order to be mixed down nicely with a suitable
+          average replay level.
+	  </p></dd><dt><span class="term">Base Directory</span></dt><dd><p>
+          Sounds and themes are searched for in a set of directories,
+          called base directories. The themes are stored in
+          subdirectories of the base directories.
+	  </p></dd></dl></div></div><div class="sect1" title="Directory Layout"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="directory_layout"></a>Directory Layout</h2></div></div></div><p>
+    Sounds and themes are looked for in a set of directories. By
+    default, applications should look in $XDG_DATA_DIRS/sounds.  Applications
+    may further add their own sound directories to this list, and
+    users may extend or change the list (in application/desktop
+    specific ways). In each of these directories themes are stored as
+    subdirectories. A theme can be spread across several base
+    directories by having subdirectories of the same name. This way
+    users can extend and override system themes.
+    </p><p>
+    In order to have a place for third party applications to install
+    their sounds there should always exist a theme called
+    "freedesktop". The data for the freedesktop theme is available for
+    download
+    at: <a class="ulink" href="http://www.freedesktop.org/software/sound-theme/" target="_top"><em class="citetitle">freedesktop.org
+    sound theme specification page</em></a>.
+    Implementations are required to look in the "freedesktop" theme if
+    a sound was not found in the current theme.
+    </p><p>
+    Each theme is stored as subdirectories of the base
+    directories. The internal name of the theme is the name of the
+    subdirectory, although the user-visible name as specified by the
+    theme may be different. Hence, theme names are case sensitive, and
+    are limited to ASCII characters. Theme names may also not contain
+    comma or space.
+    </p><p>
+    In at least one of the theme directories there must be a file
+    called index.theme that describes the theme. The first index.theme
+    found while searching the base directories in order is used. This
+    file describes the general attributes of the theme.
+    </p><p>
+    In the theme directory are also a set of subdirectories containing
+    sound files. The subdirectories are allowed to be several levels
+    deep, e.g. the subdirectory "stereo/alerts" in the theme "freedesktop"
+    would end up at $basedir/freedesktop/stereo/alerts.
+    </p><p>
+    The sounds files must be one of the types: WAV/PCM 8-48kHz, 8/16
+    bits or OGG/Vorbis I.  The extension must be ".wav", or ".oga"
+    respectively (in lower case). It is not recommended to use ".ogg"
+    extension, but it is also supported for legacy reasons.
+    </p><p>
+    Besides the sound files, there may be an additional file with
+    extra sound data for each file. It should have the same basename
+    as the sound file, with the extension ".sound". e.g. if the sound
+    file is called "system-shutdown.wav" the corresponding file would
+    be named "system-shutdown.sound".
+    </p><p>
+    Finally, a pseudo file format ".disabled" is used for disabling
+    sounds in a theme that inherits from another theme. If the sound
+    lookup algorithms detects a file with the suffix ".disabled" it
+    shall immediately terminate the lookup logic and consider the
+    sound not available. All files with ".disabled" suffix should be
+    of length zero.
+    </p><p>
+    To save disk space Vorbis I encoded sound files are recommended.
+    </p><p>
+    The sound samples must be normalized with a suitable average
+    replay level, in order to be properly mixed down. For more
+    informations, please read
+    <a class="ulink" href="http://replaygain.hydrogenaudio.org/calculating_rg.html" target="_top"><em class="citetitle">Replay
+    Gain Calculation from hydrogenaudio.org</em></a> and
+    check that your volume level is reasonable.
+    </p><p>
+    Sounds for different output profiles (i.e. for Stereo, Surround
+    4.1, Surround 5.1 and so on) may be part of a theme. All
+    implementations are required to fallback to the "stereo" output
+    profile as last resort.
+    </p></div><div class="sect1" title="File Formats"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="file_formats"></a>File Formats</h2></div></div></div><p>
+    Both the sound theme description file and the sound data files are
+    ini-style text files, as described in the desktop file
+    specification. They don't have an encoding field. Instead, they
+    must always be stored in UTF-8 encoding.
+    </p><p>
+    The index.theme file must start with a section called
+    <em class="citetitle">Sound Theme</em>, with contents according to
+    table 1 below. All lists are comma-separated.
+    </p><div class="table"><a id="id457549"></a><p class="title"><b>Table 1. Standard Keys</b></p><div class="table-contents"><table summary="Standard Keys" border="1"><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Key</th><th>Description</th><th>Value Type</th><th>Required</th></tr></thead><tbody><tr><td>Name</td><td>
+              Short name of the sound theme, used in e.g. lists when
+              selecting themes.
+	    </td><td>localestring</td><td>YES</td></tr><tr><td>Comment</td><td>
+              Longer string describing the theme
+	    </td><td>localestring</td><td>YES</td></tr><tr><td>Inherits</td><td>
+              <p>
+              The name of the theme that this theme inherits from. If a sound
+              name is not found in the current theme, it is searched for in the
+              inherited theme (and recursively in all the inherited themes).
+              </p>
+              <p>
+              If no theme is specified implementations are required to add
+              the "freedesktop" theme to the inheritance tree. An implementation
+              may optionally add other default themes in between the last
+              specified theme and the freedesktop theme.
+              </p>
+	    </td><td>strings</td><td>NO</td></tr><tr><td>Directories</td><td>
+             List of subdirectories for this theme. For every
+             subdirectory there must be a section in the index.theme
+             file describing that directory.
+	    </td><td>strings</td><td>YES</td></tr><tr><td>Hidden</td><td>
+            Whether to hide the theme in a theme selection user interface.
+            This is used for things such as fallback-themes that are not supposed
+            to be visible to the user.
+	    </td><td>boolean</td><td>NO</td></tr><tr><td>Example</td><td>
+              The name of a sound that should be used as an example of
+              how this theme sounds like.
+	    </td><td>string</td><td>NO</td></tr></tbody></table></div></div><p><br class="table-break" />
+    </p><p>
+    Each directory specified in the Directory key has a corresponding section
+    with the same name as the directory. The contents of this section is
+    listed in table 2 below.
+    </p><div class="table"><a id="id496368"></a><p class="title"><b>Table 2. Per-Directory Keys</b></p><div class="table-contents"><table summary="Per-Directory Keys" border="1"><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Key</th><th>Description</th><th>Value Type</th><th>Required</th><th>Type</th></tr></thead><tbody><tr><td>Context</td><td>
+              The context the sound is normally used in. This
+              is in detail discussed in <a class="xref" href="#context" title="Context">the section called “Context”</a>.
+	    </td><td>string</td><td>NO</td></tr><tr><td>OutputProfile</td><td>
+	      Define the output profile for which the sounds are made
+	      for. It can be "stereo" or "5.1", or any other output configuration.
+	    </td><td>string</td><td>NO</td></tr></tbody></table></div></div><p><br class="table-break" />
+    </p><p>
+    In addition to these groups you may add extra groups to the
+    index.theme file in order to extend it. These extensions must
+    begin with "X-", and can be used to add desktop specific
+    information to the theme file. Example group names would be "X-KDE
+    Sound Theme" or "X-Gnome Sound Theme".
+    </p><p>
+    The optional file filename.sound contains a group "Sound
+    Data", with the content listed in table 3.
+    </p><div class="table"><a id="id496556"></a><p class="title"><b>Table 3. Sound Data Keys</b></p><div class="table-contents"><table summary="Sound Data Keys" border="1"><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Key</th><th>Description</th><th>Value Type</th><th>Required</th></tr></thead><tbody><tr><td>DisplayName</td><td>
+              A translated UTF8 string that can be displayed instead
+              of the sound by a user interface.
+	    </td><td>localestring</td><td>NO</td></tr></tbody></table></div></div><p><br class="table-break" />
+    </p><p>
+    Extensions to filename.sound are allowed, but the
+    keys must be begin with "X-" to avoid collisions with future
+    standardized extensions to this format.
+    </p><div class="sect2" title="Context"><div class="titlepage"><div><div><h3 class="title"><a id="context"></a>Context</h3></div></div></div><p>The <code class="systemitem">context</code> allows
+    	  the designer to group sounds on a conceptual level.
+	  It doesn't act as a namespace in the file system, such
+	  that sounds can have identical names, but allows
+	  implementations to categorize and sort by it, for example.
+ 	</p><p>These are the available contexts:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p title="Alert"><b>Alert. </b>Sounds to alert the user of an action or event
+	    which may have a major impact on the system or their
+	    current use, such as
+	    <span class="action">dialog-error</span>.</p></li><li class="listitem"><p title="Notification"><b>Notification. </b>Sounds to notify the user that the system, or their
+	    current use has changed state in some way, e.g. new email
+	    arriving, new non-critical updates available...</p></li><li class="listitem"><p title="Support"><b>Support. </b>Sounds that give the user feedback on their
+	      actions. Sounds on window opening/closing for
+	      example.</p></li><li class="listitem"><p title="Game"><b>Game. </b>Sounds used for games.</p></li></ul></div></div></div><div class="sect1" title="Sound Lookup"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="sound_lookup"></a>Sound Lookup</h2></div></div></div><p>
+    The sound lookup mechanism has two global settings, the list of
+    base directories and the internal name of the current theme. Given
+    these we specify how to look up sound file from the sound
+    name.
+    </p><p>
+    The lookup is done first in the current theme, and then
+    recursively in each of the current theme's parents, and finally in
+    the default theme called "freedesktop" (implementations may add
+    more default themes before "freedesktop", but "freedesktop" must
+    be last). A last fallback is unthemed sound. As soon as there is
+    a sound that matches in a theme, the search is stopped.
+    </p><p>
+    To support localized sounds we first lookup the sound in the
+    LC_MESSAGES locale setting of the program. If that fails, the
+    locale string is truncated at the "@" if it includes it and it is
+    tried again. Then, the locale string is truncated at the "_" if it
+    includes it and it is tried again. Then it is looked for a sound
+    in the "C" locale. Finally non-localized sound files are searched.
+    </p><p>
+    If a sound name is not found, it is truncated at the last "-" and
+    it is tried again. This is done again until no further "-" are
+    present in the name string. This is useful to define common sounds
+    for similar events. i.e. instead of defining two seperate sounds
+    for "new-message-im" and "new-message-email" it might make sense
+    to define just "new-message" instead.
+    </p><p>
+    The lookup is done first in the requested output profile, followed
+    by a lookup in "stereo" on failure and then without any output
+    profile.
+    </p><p>
+    The lookup algorithm should check for ".disabled" files first,
+    followed by ".oga" (then ".ogg", although this might be removed
+    later) and finally for ".wav".
+    </p><p>
+    Configuration programs that allow limited user manipulation of the
+    selected sound theme (i.e. for disabling or replacing certain
+    sounds), should create a dynamicly created theme "__custom" that
+    inherits from the selected theme and store it in the
+    "~/.local/share/sounds/__custom" directory. Its index.theme should
+    list a single directory ".". The sounds defined in that theme
+    should not be attached to any output profile and should not be
+    localized. The overwritten sounds should thus be stored directly
+    below the aforementioned directory.
+    </p><p>
+    The exact algorithm (in pseudocode) for looking up a sound in a
+    theme is:
+
+    </p><pre class="programlisting">
+FindSound(sound, locale, outputprofile, theme) {
+  filename = LookupSound (sound, locale, outputprofile, theme)
+  if filename != none
+    return filename
+
+  if theme has parents
+    for parent in theme.parents {
+      filename = LookupSound (sound, locale, outputprofile, parent)
+      if filename != none
+        return filename
+    }
+
+  return none
+}
+     </pre><p>
+
+     With the following helper functions:
+
+     </p><pre class="programlisting">
+LookupSound (requestedname, requestedlocale, requestedoutputprofile, requestedtheme) {
+  for theme in (requestedtheme,
+                "freedesktop",
+                "") {
+    for profile in (requestedoutputprofile, "stereo", "") {
+      for each subdir in $(theme subdir list) {
+        if DirectoryMatchesOutputProfile(subdir, profile) {
+          for each directory in $(basename list) {
+            for each name in (requestedname,
+                              truncatesuffix(requestedname, "-"),
+                              truncatesuffix(truncatesuffix(requestedname, "-"), "-"),
+                              truncatesuffix(truncatesuffix(truncatesuffix(requestedname, "-"), "-"), "-"),
+                              ...) {
+              for each locale in (requestedlocale,
+                                  truncatesuffix(requestedlocale, "@"),
+                                  truncatesuffix(requestedlocale, "_"),
+                                  "C",
+                                  "") {
+                for extension in ("disabled", "oga", "ogg", "wav") {
+	          filename = directory/theme/subdir/locale/name.extension
+                  if exist filename
+                    return filename
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return none
+}
+
+DirectoryMatchesOutputProfile(subdir, profile) {
+  read OutputProfile from subdir
+  if OutputProfile == profile
+    return true
+  return false
+}
+</pre><p>
+
+    </p></div><div class="sect1" title="Example"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="example"></a>Example</h2></div></div></div><p>
+     Here is an example index.theme file:
+     </p><pre class="programlisting">
+[Sound Theme]
+Name=Birch
+Name[fr]=Bouleau
+Comment=Sound theme using wooden instruments
+Comment[fr]=Theme utilisant des instruments en bois
+Inherits=wood,default
+Directories=stereo 5.1
+
+[stereo]
+OutputProfile=stereo
+
+[5.1]
+OutputProfile=5.1
+</pre><p>
+
+The corresponding directory tree in the /usr/share/sounds
+directory could look like this:
+
+</p><pre class="programlisting">
+birch/index.theme
+birch/stereo/evolution-urgent-message.oga
+birch/stereo/evolution-urgent-message.wav
+birch/stereo/fr/evolution-urgent-message.oga
+birch/stereo/evolution-urgent-message.sound
+birch/5.1/evolution-urgent-message.oga
+</pre><p>
+
+Where birch/stereo/evolution-urgent-message.sound contains:
+
+</p><pre class="programlisting">
+[Sound Data]
+DisplayName=Evolution urgent message
+DisplayName[fr]=Message urgent dans Evolution
+</pre><p>
+
+    </p><p>
+    In this example a lookup of "evolution-urgent-message", with a 5.1
+    system preference and no localization, would get the
+    "birch/5.1/evolution-urgent-message.oga" sound file.
+    </p></div><div class="sect1" title="Installing Application Sounds"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="install_sounds"></a>Installing Application Sounds</h2></div></div></div><p>
+    If you're an application author and you want to install sounds
+    so that they can be used by your application, you should
+    at least install the sound file in the "freedesktop" theme. This means
+    installing a stereo WAV file in
+    $XDG_DATA_DIRS/sounds/freedesktop/stereo/.
+    </p><p>
+    Optionally you can install sounds in different formats and
+    languages. For example, installing a localized OGG/Vorbis 5.1 game
+    sound in $prefix/share/sounds/freedesktop/5.1/fr.
+    </p><p>
+    You might even want to install sounds that match other well
+    known themes so your application will fit in with some specific
+    desktop environment.
+    </p><p>
+    It is recommended that the sounds installed in the freedesktop
+    theme sound neutral, since it is a fallback theme that will be
+    used in combination with some very different sounds from any
+    origin. But if you don't have any neutral sound, please install
+    whatever sound you have in the freedesktop theme so that all your
+    application can at least produce some sounds in all themes.
+    </p><p>
+    After installing/updating a sound in a theme directory, make sure
+    to update the mtime of the theme directory itself (i.e. touch
+    $XDG_DATA_DIRS/sounds/freedesktop or similar), so that caches can
+    be kept up-to-date.
+    </p></div><div class="sect1" title="Implementation Notes"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="implementation_notes"></a>Implementation Notes</h2></div></div></div><p>
+    The algorithm as described in this document works by always
+    looking up filenames in directories (a stat in unix
+    terminology). A good implementation is expected to read the
+    directories once, and do all lookups in memory using that
+    information.
+    </p><p>
+    This caching can make it impossible for users to add sounds
+    without having to restart applications. In order to handle this,
+    any implementation that does caching is required to look at the
+    mtime of the toplevel sound theme directories when doing a cache
+    lookup, unless it already did so less than 5 seconds ago. This
+    means that any sound editor or theme installation program may
+    change the mtime of the the toplevel theme directory (such as
+    $XDG_DATA_DIRS/sounds/freedesktop) where it changed the theme to
+    make sure that the new sounds will eventually get used.
+    </p></div><div class="sect1" title="Background"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="background"></a>Background</h2></div></div></div><p>
+    The sound theme specification is heavily based on the "Icon Theme
+    Specification" by Alexander Larsson and Frans Englich.
+    </p></div><div class="appendix" title="A. Change history"><h2 class="title" style="clear: both"><a id="changes"></a>A. Change history</h2><p title="Version 0.5, 2 September 2008, Marc-Andre Lureau"><b>Version 0.5, 2 September 2008, Marc-Andre Lureau. </b>
+	</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	      Deprecate usage of ".ogg" extension in favor of ".oga"
+	      (according
+	      to <a class="ulink" href="http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions" target="_top"><em class="citetitle">MIME
+	      Types and File Extensions from xiph.org</em></a>)
+	    </p></li></ul></div><p title="Version 0.5, 2 September 2008, Marc-Andre Lureau">
+      </p><p title="Version 0.4, 29 July 2008, Lennart Poettering"><b>Version 0.4, 29 July 2008, Lennart Poettering. </b>
+	</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	      Document that every time a theme is updated to changed the directory needs to be touched.
+	    </p></li></ul></div><p title="Version 0.4, 29 July 2008, Lennart Poettering">
+      </p><p title="Version 0.3, 25 July 2008, Lennart Poettering"><b>Version 0.3, 25 July 2008, Lennart Poettering. </b>
+	</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	      Reordered lookup algorithm, to allow easy overwriting of sounds from inherited themes.
+	    </p></li><li class="listitem"><p>
+	      Document "__custom" theme.
+	    </p></li><li class="listitem"><p>
+	      Document ".disabled" sound files.
+	    </p></li><li class="listitem"><p>
+	      Other fixes
+	    </p></li></ul></div><p title="Version 0.3, 25 July 2008, Lennart Poettering">
+      </p><p title="Version 0.2, 4 June 2008, Marc-Andre Lureau and Lennart Poettering"><b>Version 0.2, 4 June 2008, Marc-Andre Lureau and Lennart Poettering. </b>
+	</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	      Updated the Lookup algorithm.
+	    </p></li><li class="listitem"><p>
+	      Remove Length and Locale from directory property.
+	    </p></li><li class="listitem"><p>
+	      Use OutputProfile instead of SoundSystem.
+	    </p></li><li class="listitem"><p>
+	      Add ReplayGain note.
+	    </p></li></ul></div><p title="Version 0.2, 4 June 2008, Marc-Andre Lureau and Lennart Poettering">
+      </p><p title="Version 0.1, 11 February 2008, Marc-Andre Lureau"><b>Version 0.1, 11 February 2008, Marc-Andre Lureau. </b>
+	</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	      Initial draft.
+	    </p></li></ul></div><p title="Version 0.1, 11 February 2008, Marc-Andre Lureau">
+      </p></div></div></body></html>
