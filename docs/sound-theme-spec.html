@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Sound Theme Specification</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2" /></head><body><div class="article" title="Sound Theme Specification"><div class="titlepage"><div><div><h2 class="title"><a id="index"></a>Sound Theme Specification</h2></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Marc-Andre</span> <span class="surname">Lureau</span></h3><div class="affiliation"><div class="address"><p><br />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Sound Theme Specification</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /></head><body><div class="article"><div class="titlepage"><div><div><h2 class="title"><a id="index"></a>Sound Theme Specification</h2></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Marc-Andre</span> <span class="surname">Lureau</span></h3><div class="affiliation"><div class="address"><p><br />
 	    <code class="email">&lt;<a class="email" href="mailto:marcandre.lureau@gmail.com">marcandre.lureau@gmail.com</a>&gt;</code><br />
 	  </p></div></div></div><div class="author"><h3 class="author"><span class="firstname">Lennart</span> <span class="surname">Poettering</span></h3><div class="affiliation"><div class="address"><p><br />
 	    <code class="email">&lt;<a class="email" href="mailto:lennart@poettering.net">lennart@poettering.net</a>&gt;</code><br />
@@ -10,7 +9,7 @@
 	    <code class="email">&lt;<a class="email" href="mailto:alexl@redhat.com">alexl@redhat.com</a>&gt;</code><br />
 	  </p></div></div></div><div class="author"><h3 class="author"><span class="firstname">Frans</span> <span class="surname">Englich</span></h3><div class="affiliation"><div class="address"><p><br />
 	    <code class="email">&lt;<a class="email" href="mailto:frans.englich@telia.com">frans.englich@telia.com</a>&gt;</code><br />
-	  </p></div></div></div></div></div><div><p class="releaseinfo">Post-0.5 Snapshot</p></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#overview">Overview</a></span></dt><dt><span class="sect1"><a href="#definitions">Definitions</a></span></dt><dt><span class="sect1"><a href="#directory_layout">Directory Layout</a></span></dt><dt><span class="sect1"><a href="#file_formats">File Formats</a></span></dt><dd><dl><dt><span class="sect2"><a href="#context">Context</a></span></dt></dl></dd><dt><span class="sect1"><a href="#sound_lookup">Sound Lookup</a></span></dt><dt><span class="sect1"><a href="#example">Example</a></span></dt><dt><span class="sect1"><a href="#install_sounds">Installing Application Sounds</a></span></dt><dt><span class="sect1"><a href="#implementation_notes">Implementation Notes</a></span></dt><dt><span class="sect1"><a href="#background">Background</a></span></dt><dt><span class="appendix"><a href="#changes">A. Change history</a></span></dt></dl></div><div class="sect1" title="Overview"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="overview"></a>Overview</h2></div></div></div><p>
+	  </p></div></div></div></div></div><div><p class="releaseinfo">Version 0.2</p></div></div><hr /></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="sect1"><a href="#overview">Overview</a></span></dt><dt><span class="sect1"><a href="#definitions">Definitions</a></span></dt><dt><span class="sect1"><a href="#directory_layout">Directory Layout</a></span></dt><dt><span class="sect1"><a href="#file_formats">File Formats</a></span></dt><dd><dl><dt><span class="sect2"><a href="#context">Context</a></span></dt></dl></dd><dt><span class="sect1"><a href="#sound_lookup">Sound Lookup</a></span></dt><dt><span class="sect1"><a href="#example">Example</a></span></dt><dt><span class="sect1"><a href="#install_sounds">Installing Application Sounds</a></span></dt><dt><span class="sect1"><a href="#implementation_notes">Implementation Notes</a></span></dt><dt><span class="sect1"><a href="#background">Background</a></span></dt><dt><span class="appendix"><a href="#changes">A. Change history</a></span></dt></dl></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="overview"></a>Overview</h2></div></div></div><p>
     A sound theme is a set of event sounds that share a common feel,
     or instrument set.  The user can then select the sound theme that
     they want to use, and all applications use sounds from the theme.
@@ -18,7 +17,7 @@
     From a programmer perspective a sound theme is just a
     mapping. Given a set of directories to look for sounds in and a
     theme name it maps from sound name to a sound filename.
-    </p></div><div class="sect1" title="Definitions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="definitions"></a>Definitions</h2></div></div></div><div class="variablelist"><dl><dt><span class="term">Sound Theme</span></dt><dd><p>
+    </p></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="definitions"></a>Definitions</h2></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">Sound Theme</span></dt><dd><p>
           A sound theme is a named set of sounds. It is used to map
           from a sound name. Themes may inherit
           from other themes as a way to extend them.
@@ -33,7 +32,7 @@
           Sounds and themes are searched for in a set of directories,
           called base directories. The themes are stored in
           subdirectories of the base directories.
-	  </p></dd></dl></div></div><div class="sect1" title="Directory Layout"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="directory_layout"></a>Directory Layout</h2></div></div></div><p>
+	  </p></dd></dl></div></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="directory_layout"></a>Directory Layout</h2></div></div></div><p>
     Sounds and themes are looked for in a set of directories. By
     default, applications should look in $XDG_DATA_DIRS/sounds.  Applications
     may further add their own sound directories to this list, and
@@ -100,7 +99,7 @@
     4.1, Surround 5.1 and so on) may be part of a theme. All
     implementations are required to fallback to the "stereo" output
     profile as last resort.
-    </p></div><div class="sect1" title="File Formats"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="file_formats"></a>File Formats</h2></div></div></div><p>
+    </p></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="file_formats"></a>File Formats</h2></div></div></div><p>
     Both the sound theme description file and the sound data files are
     ini-style text files, as described in the desktop file
     specification. They don't have an encoding field. Instead, they
@@ -109,7 +108,7 @@
     The index.theme file must start with a section called
     <em class="citetitle">Sound Theme</em>, with contents according to
     table 1 below. All lists are comma-separated.
-    </p><div class="table"><a id="id457549"></a><p class="title"><b>Table 1. Standard Keys</b></p><div class="table-contents"><table summary="Standard Keys" border="1"><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Key</th><th>Description</th><th>Value Type</th><th>Required</th></tr></thead><tbody><tr><td>Name</td><td>
+    </p><div class="table"><a id="idm88"></a><p class="title"><strong>Table 1. Standard Keys</strong></p><div class="table-contents"><table class="table" summary="Standard Keys" border="1"><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Key</th><th>Description</th><th>Value Type</th><th>Required</th></tr></thead><tbody><tr><td>Name</td><td>
               Short name of the sound theme, used in e.g. lists when
               selecting themes.
 	    </td><td>localestring</td><td>YES</td></tr><tr><td>Comment</td><td>
@@ -142,7 +141,7 @@
     Each directory specified in the Directory key has a corresponding section
     with the same name as the directory. The contents of this section is
     listed in table 2 below.
-    </p><div class="table"><a id="id496368"></a><p class="title"><b>Table 2. Per-Directory Keys</b></p><div class="table-contents"><table summary="Per-Directory Keys" border="1"><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Key</th><th>Description</th><th>Value Type</th><th>Required</th><th>Type</th></tr></thead><tbody><tr><td>Context</td><td>
+    </p><div class="table"><a id="idm131"></a><p class="title"><strong>Table 2. Per-Directory Keys</strong></p><div class="table-contents"><table class="table" summary="Per-Directory Keys" border="1"><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Key</th><th>Description</th><th>Value Type</th><th>Required</th><th>Type</th></tr></thead><tbody><tr><td>Context</td><td>
               The context the sound is normally used in. This
               is in detail discussed in <a class="xref" href="#context" title="Context">the section called “Context”</a>.
 	    </td><td>string</td><td>NO</td></tr><tr><td>OutputProfile</td><td>
@@ -158,7 +157,7 @@
     </p><p>
     The optional file filename.sound contains a group "Sound
     Data", with the content listed in table 3.
-    </p><div class="table"><a id="id496556"></a><p class="title"><b>Table 3. Sound Data Keys</b></p><div class="table-contents"><table summary="Sound Data Keys" border="1"><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Key</th><th>Description</th><th>Value Type</th><th>Required</th></tr></thead><tbody><tr><td>DisplayName</td><td>
+    </p><div class="table"><a id="idm155"></a><p class="title"><strong>Table 3. Sound Data Keys</strong></p><div class="table-contents"><table class="table" summary="Sound Data Keys" border="1"><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Key</th><th>Description</th><th>Value Type</th><th>Required</th></tr></thead><tbody><tr><td>DisplayName</td><td>
               A translated UTF8 string that can be displayed instead
               of the sound by a user interface.
 	    </td><td>localestring</td><td>NO</td></tr></tbody></table></div></div><p><br class="table-break" />
@@ -166,19 +165,19 @@
     Extensions to filename.sound are allowed, but the
     keys must be begin with "X-" to avoid collisions with future
     standardized extensions to this format.
-    </p><div class="sect2" title="Context"><div class="titlepage"><div><div><h3 class="title"><a id="context"></a>Context</h3></div></div></div><p>The <code class="systemitem">context</code> allows
+    </p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a id="context"></a>Context</h3></div></div></div><p>The <code class="systemitem">context</code> allows
     	  the designer to group sounds on a conceptual level.
 	  It doesn't act as a namespace in the file system, such
 	  that sounds can have identical names, but allows
 	  implementations to categorize and sort by it, for example.
- 	</p><p>These are the available contexts:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p title="Alert"><b>Alert. </b>Sounds to alert the user of an action or event
+ 	</p><p>These are the available contexts:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p><strong>Alert. </strong>Sounds to alert the user of an action or event
 	    which may have a major impact on the system or their
 	    current use, such as
-	    <span class="action">dialog-error</span>.</p></li><li class="listitem"><p title="Notification"><b>Notification. </b>Sounds to notify the user that the system, or their
+	    <span class="action">dialog-error</span>.</p></li><li class="listitem"><p><strong>Notification. </strong>Sounds to notify the user that the system, or their
 	    current use has changed state in some way, e.g. new email
-	    arriving, new non-critical updates available...</p></li><li class="listitem"><p title="Support"><b>Support. </b>Sounds that give the user feedback on their
+	    arriving, new non-critical updates available...</p></li><li class="listitem"><p><strong>Support. </strong>Sounds that give the user feedback on their
 	      actions. Sounds on window opening/closing for
-	      example.</p></li><li class="listitem"><p title="Game"><b>Game. </b>Sounds used for games.</p></li></ul></div></div></div><div class="sect1" title="Sound Lookup"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="sound_lookup"></a>Sound Lookup</h2></div></div></div><p>
+	      example.</p></li><li class="listitem"><p><strong>Game. </strong>Sounds used for games.</p></li></ul></div></div></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="sound_lookup"></a>Sound Lookup</h2></div></div></div><p>
     The sound lookup mechanism has two global settings, the list of
     base directories and the internal name of the current theme. Given
     these we specify how to look up sound file from the sound
@@ -288,7 +287,7 @@ DirectoryMatchesOutputProfile(subdir, profile) {
 }
 </pre><p>
 
-    </p></div><div class="sect1" title="Example"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="example"></a>Example</h2></div></div></div><p>
+    </p></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="example"></a>Example</h2></div></div></div><p>
      Here is an example index.theme file:
      </p><pre class="programlisting">
 [Sound Theme]
@@ -330,7 +329,7 @@ DisplayName[fr]=Message urgent dans Evolution
     In this example a lookup of "evolution-urgent-message", with a 5.1
     system preference and no localization, would get the
     "birch/5.1/evolution-urgent-message.oga" sound file.
-    </p></div><div class="sect1" title="Installing Application Sounds"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="install_sounds"></a>Installing Application Sounds</h2></div></div></div><p>
+    </p></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="install_sounds"></a>Installing Application Sounds</h2></div></div></div><p>
     If you're an application author and you want to install sounds
     so that they can be used by your application, you should
     at least install the sound file in the "freedesktop" theme. This means
@@ -356,7 +355,7 @@ DisplayName[fr]=Message urgent dans Evolution
     to update the mtime of the theme directory itself (i.e. touch
     $XDG_DATA_DIRS/sounds/freedesktop or similar), so that caches can
     be kept up-to-date.
-    </p></div><div class="sect1" title="Implementation Notes"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="implementation_notes"></a>Implementation Notes</h2></div></div></div><p>
+    </p></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="implementation_notes"></a>Implementation Notes</h2></div></div></div><p>
     The algorithm as described in this document works by always
     looking up filenames in directories (a stat in unix
     terminology). A good implementation is expected to read the
@@ -372,22 +371,22 @@ DisplayName[fr]=Message urgent dans Evolution
     change the mtime of the the toplevel theme directory (such as
     $XDG_DATA_DIRS/sounds/freedesktop) where it changed the theme to
     make sure that the new sounds will eventually get used.
-    </p></div><div class="sect1" title="Background"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="background"></a>Background</h2></div></div></div><p>
+    </p></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="background"></a>Background</h2></div></div></div><p>
     The sound theme specification is heavily based on the "Icon Theme
     Specification" by Alexander Larsson and Frans Englich.
-    </p></div><div class="appendix" title="A. Change history"><h2 class="title" style="clear: both"><a id="changes"></a>A. Change history</h2><p title="Version 0.5, 2 September 2008, Marc-Andre Lureau"><b>Version 0.5, 2 September 2008, Marc-Andre Lureau. </b>
-	</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+    </p></div><div class="appendix"><h2 class="title" style="clear: both"><a id="changes"></a>A. Change history</h2><p><strong>Version 0.5, 2 September 2008, Marc-Andre Lureau. </strong>
+	</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
 	      Deprecate usage of ".ogg" extension in favor of ".oga"
 	      (according
 	      to <a class="ulink" href="http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions" target="_top"><em class="citetitle">MIME
 	      Types and File Extensions from xiph.org</em></a>)
-	    </p></li></ul></div><p title="Version 0.5, 2 September 2008, Marc-Andre Lureau">
-      </p><p title="Version 0.4, 29 July 2008, Lennart Poettering"><b>Version 0.4, 29 July 2008, Lennart Poettering. </b>
-	</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	    </p></li></ul></div><p>
+      </p><p><strong>Version 0.4, 29 July 2008, Lennart Poettering. </strong>
+	</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
 	      Document that every time a theme is updated to changed the directory needs to be touched.
-	    </p></li></ul></div><p title="Version 0.4, 29 July 2008, Lennart Poettering">
-      </p><p title="Version 0.3, 25 July 2008, Lennart Poettering"><b>Version 0.3, 25 July 2008, Lennart Poettering. </b>
-	</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	    </p></li></ul></div><p>
+      </p><p><strong>Version 0.3, 25 July 2008, Lennart Poettering. </strong>
+	</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
 	      Reordered lookup algorithm, to allow easy overwriting of sounds from inherited themes.
 	    </p></li><li class="listitem"><p>
 	      Document "__custom" theme.
@@ -395,9 +394,9 @@ DisplayName[fr]=Message urgent dans Evolution
 	      Document ".disabled" sound files.
 	    </p></li><li class="listitem"><p>
 	      Other fixes
-	    </p></li></ul></div><p title="Version 0.3, 25 July 2008, Lennart Poettering">
-      </p><p title="Version 0.2, 4 June 2008, Marc-Andre Lureau and Lennart Poettering"><b>Version 0.2, 4 June 2008, Marc-Andre Lureau and Lennart Poettering. </b>
-	</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	    </p></li></ul></div><p>
+      </p><p><strong>Version 0.2, 4 June 2008, Marc-Andre Lureau and Lennart Poettering. </strong>
+	</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
 	      Updated the Lookup algorithm.
 	    </p></li><li class="listitem"><p>
 	      Remove Length and Locale from directory property.
@@ -405,9 +404,9 @@ DisplayName[fr]=Message urgent dans Evolution
 	      Use OutputProfile instead of SoundSystem.
 	    </p></li><li class="listitem"><p>
 	      Add ReplayGain note.
-	    </p></li></ul></div><p title="Version 0.2, 4 June 2008, Marc-Andre Lureau and Lennart Poettering">
-      </p><p title="Version 0.1, 11 February 2008, Marc-Andre Lureau"><b>Version 0.1, 11 February 2008, Marc-Andre Lureau. </b>
-	</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	    </p></li></ul></div><p>
+      </p><p><strong>Version 0.1, 11 February 2008, Marc-Andre Lureau. </strong>
+	</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
 	      Initial draft.
-	    </p></li></ul></div><p title="Version 0.1, 11 February 2008, Marc-Andre Lureau">
+	    </p></li></ul></div><p>
       </p></div></div></body></html>
